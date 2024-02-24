@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box ;
+}
+
+.container{
+    max-width: 1240px;
+    width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+.card_mony{
+    display: flex;
+    gap: 8px;
+}
+.title{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 35px;
+}
+.wallet_card{
+
+    width: 500px;
+    height: 340px;
+    background: black;
+    opacity: 0.8;
+    margin-top: 70px;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.wallet_mony{
+    color: white;
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.exchange_box{
+    margin-top: 70px;
+    width: 700px;
+}
+.select_card{
+    display: flex;
+    justify-content: space-between;
+}
+.form{
+    margin-top: 10px;
+}
+.exchange_input{
+    padding: 10px 5px;
+    font-size: 20px;
+    outline: none;
+    border: 1px solid grey;
+    width: 348px;
+}
+select{
+    padding: 8px 20px;
+    border: 1px solid grey;
+    display: flex;
+    outline: none;
+}
+option{
+    margin-top: 20px;
+}
+.btn{
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 0px;
+    border: none;
+    background: rgb(6, 62, 1);
+    cursor: pointer;
+    opacity: 0.8;
+    font-size: 20px;
+    color: white;
+}
+.btn:active {
+    background: rgb(0, 0, 0);
+}
+table{
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+}
+.list_card{
+    background: #f2f2f3;
+}
+.list_title{
+    font-size: 25px;
+}
+.list_word{
+    font-size: 20px;
+}
+.list_title,
+.list_word{
+    font-family: Arial, Helvetica, sans-serif;
+
+    padding: 12px ;
+    border: 1px solid #ddd;
+}
+
+.kurs{
+    border: none;
+    background: #f2f2f3;
+    color: black;
+    font-size: 25px;
+    text-decoration: none;
+    padding: 8px 0px;
+    text-align: center;    
+}
+
+.input_card{
+    display: flex;
+    align-items: center;
+}
+
+.form2{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.input_card{
+    display: flex;
+    gap: 15px;
+}
+.input_text{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+.som{
+    display: none;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Wallet</title>
+</head>
+<body>
+    <header>
+        <section class="wallet">
+            <div class="container">
+                
+                <div class="wallet_box">
+                    <div class="wallet_card">
+                        <h2 class="title">Wallet:</h2>
+                        <div class="card_mony">
+                            <span class="wallet_mony">UZS:</span>
+                            <h3 class="wallet_mony" id="monyUZD">450</h3>
+                        </div>
+                        <div class="card_mony">
+                            <span class="wallet_mony">UZD:</span>
+                            <h3 class="wallet_mony"> 1.250.000</h3>
+                        </div>
+                        <div class="card_mony">
+                            <span class="wallet_mony">RUB:</span>
+                            <h3 class="wallet_mony"> 3.000 </h3>
+                        </div>
+                        <a href="./index2.html" class="kurs">Kurs</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+    <section class="exchange">
+        <div class="container">
+            <div class="exchange_box">
+                <div class="select_card">
+                    <select name="" id="">
+                        <option value="UZS">UZS</option>
+                        <option value="UZD">UZD</option>
+                        <option value="RUB">RUB</option>
+                    </select>
+                    <select name="" id="">
+                        <option value="UZS">UZS</option>
+                        <option value="UZD">UZD</option>
+                        <option value="RUB">RUB</option>
+                    </select>
+                </div>
+                <form class="form" action="">
+                    <input class="exchange_input" type="number" id="inputEx">
+                    <input class="exchange_input" type="number">
+                </form>
+                <button class="btn" id="exchangeBtn">Exchange</button>
+            </div>
+        </div>
+    </section>
+    <section class="list">
+        <div class="container">
+            <table>
+                <thead>
+                    <tr class="list_card">
+                        <th class="list_title">currency in</th>
+                        <th class="list_title">currency out</th>
+                        <th class="list_title">sana</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script src="./script.js"></script>
+</body>
+</html>

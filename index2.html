@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <section class="exchange">
+        <div class="container">
+            <div class="exchange_box">
+                <div class="select_card">
+                    <select id="currency">
+                        <option value="UZS">UZS</option>
+                        <option value="USD">USD</option>
+                        <option value="RUB">RUB</option>
+                    </select>
+                </div>
+                <form class="form" action="">
+                    <input class="exchange_input" type="number">
+                </form>
+                <form class="form2" action="">
+                    <div class="input_card"> 
+                        <h4 class="input_text" id="currencyUSD">USD:</h4>
+                        <input type="text" class="exchange_input">
+                    </div>
+                    <div class="input_card">
+                        <h4 class="input_text" id="currencyRUB">RUB:</h4>
+                        <input type="text" class="exchange_input">
+                    </div>                                                      
+                </form>
+                <button class="btn">Add</button>
+            </div>
+        </div>
+    </section>
+    <section class="list">
+        <div class="container">
+            <table>
+                <thead id="currency_header">
+                    <tr class="list_card">
+                        <th class="list_title" id="tableUSD">USD</th>
+                        <th class="list_title" id="tableRUB">RUB</th>
+                        <th class="list_title">Kun</th>
+                    </tr>
+                </thead>
+                <tbody id="currency_body">
+                    <!-- <tr>
+                        <td class="list_word usd">1$</td>
+                        <td class="list_word rub">100ru</td>
+                        <td class="list_word">19.2.2024, 19:09</td>
+                    </tr>
+                    <tr>
+                        <td class="list_word usd">1$</td>
+                        <td class="list_word rub">120ru</td>
+                        <td class="list_word">19.2.2024, 21:35</td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script src="./script2.js"></script>
+</body>
+</html>
