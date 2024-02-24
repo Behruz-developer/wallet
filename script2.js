@@ -19,7 +19,8 @@ const kursiValyut = savedCurrency || [
 ]
 
 function addCurrency(kursiValyut){
-
+    // currencyHeader.innerHTML = '';
+    // currencyBody.innerHTML = '';
     for(const kursiValyuta of kursiValyut){
         if(currency.value == kursiValyuta.mainValyuta){
             tableUSD.innerText = kursiValyuta.extraValyuta1.valyuta
