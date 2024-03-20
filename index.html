@@ -10,63 +10,71 @@
     <header>
         <section class="wallet">
             <div class="container">
-                
                 <div class="wallet_box">
                     <div class="wallet_card">
-                        <h2 class="title">Wallet:</h2>
+                        <h2 class="title">Wallet</h2>
                         <div class="card_mony">
                             <span class="wallet_mony">UZS:</span>
-                            <h3 class="wallet_mony" id="monyUZD">450</h3>
+                            <h3 class="wallet_mony" id="monyUZS"></h3>
                         </div>
                         <div class="card_mony">
-                            <span class="wallet_mony">UZD:</span>
-                            <h3 class="wallet_mony"> 1.250.000</h3>
+                            <span class="wallet_mony">USD:</span>
+                            <h3 class="wallet_mony" id="monyUSD"> </h3>
                         </div>
                         <div class="card_mony">
                             <span class="wallet_mony">RUB:</span>
-                            <h3 class="wallet_mony"> 3.000 </h3>
+                            <h3 class="wallet_mony" id="monyRUB"></h3>
                         </div>
                         <a href="./index2.html" class="kurs">Kurs</a>
+                    </div>
+                    <div class="exchange_box">
+                        <div class="select_card">
+                            <div class="select_box">
+                                <h1>Sell</h1>
+                                <select name="" id="sell">
+                                    <option value=""></option>
+                                    <option value="UZS">UZS</option>
+                                    <option value="USD">USD</option>
+                                    <option value="RUB">RUB</option>
+                                </select>
+                            </div>
+        
+                            <h1 class="kurs1">kurs</h1>
+                            <div class="select_box">
+                                <h1>Buy</h1>
+                                <select name="" id="buy">
+                                    <option value=""></option>
+                                    <option value="UZS">UZS</option>
+                                    <option value="USD">USD</option>
+                                    <option value="RUB">RUB</option>
+                                </select>
+                            </div>
+        
+                        </div>
+                        <form class="form" action="">
+                            <input class="exchange_input" type="text" id="inputSell">
+                            <input class="exchange_input" type="text" id="increase">
+                            <div class="card" id="inputBuy"></div>
+                        </form>
+                        <button class="btn" id="exchangeBtn">Exchange</button>
                     </div>
                 </div>
             </div>
         </section>
     </header>
-    <section class="exchange">
-        <div class="container">
-            <div class="exchange_box">
-                <div class="select_card">
-                    <select name="" id="">
-                        <option value="UZS">UZS</option>
-                        <option value="UZD">UZD</option>
-                        <option value="RUB">RUB</option>
-                    </select>
-                    <select name="" id="">
-                        <option value="UZS">UZS</option>
-                        <option value="UZD">UZD</option>
-                        <option value="RUB">RUB</option>
-                    </select>
-                </div>
-                <form class="form" action="">
-                    <input class="exchange_input" type="number" id="inputEx">
-                    <input class="exchange_input" type="number">
-                </form>
-                <button class="btn" id="exchangeBtn">Exchange</button>
-            </div>
-        </div>
-    </section>
     <section class="list">
         <div class="container">
             <table>
                 <thead>
                     <tr class="list_card">
-                        <th class="list_title">currency in</th>
-                        <th class="list_title">currency out</th>
+                        <th class="list_title">Sell</th>
+                        <th class="list_title">Buy</th>
+                        <th class="list_title">kurs</th>
                         <th class="list_title">sana</th>
                     </tr>
                 </thead>
-                <tbody>
-
+                <tbody id="table_body">
+                    
                 </tbody>
             </table>
         </div>

@@ -3,9 +3,8 @@
     padding: 0;
     box-sizing: border-box ;
 }
-
 .container{
-    max-width: 1240px;
+    max-width: 1340px;
     width: 100%;
     padding: 0 15px;
     margin: 0 auto;
@@ -20,8 +19,11 @@
     text-align: center;
     font-size: 35px;
 }
+.wallet_box{
+    display: flex;
+    justify-content: space-between;
+}
 .wallet_card{
-
     width: 500px;
     height: 340px;
     background: black;
@@ -41,21 +43,23 @@
 
 .exchange_box{
     margin-top: 70px;
-    width: 700px;
 }
 .select_card{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .form{
+    display: flex;
     margin-top: 10px;
+    gap: 10px;
 }
 .exchange_input{
     padding: 10px 5px;
     font-size: 20px;
     outline: none;
     border: 1px solid grey;
-    width: 348px;
+    width: 250px;
 }
 select{
     padding: 8px 20px;
@@ -91,16 +95,25 @@ table{
 }
 .list_title{
     font-size: 25px;
+    padding-left: 12px;
 }
 .list_word{
     font-size: 20px;
+    position: relative;
+    padding-left: 10px;
+}
+.list_word1 {
+text-align: right;
+}
+.list_word1::before{
+    content: '';
+    padding: 0 10px;
 }
 .list_title,
 .list_word{
     font-family: Arial, Helvetica, sans-serif;
-
-    padding: 12px ;
-    border: 1px solid #ddd;
+    height: 50px;
+    border: 1px solid #c6c6c6;
 }
 
 .kurs{
@@ -117,7 +130,6 @@ table{
     display: flex;
     align-items: center;
 }
-
 .form2{
     margin-top: 30px;
     display: flex;
@@ -134,4 +146,12 @@ table{
 }
 .som{
     display: none;
+}
+.kurs1{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.card{
+    border: 1px solid black;
+    width: 250px;
+    padding: 20px;
 }
