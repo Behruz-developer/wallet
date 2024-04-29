@@ -100,6 +100,7 @@ table{
 .list_word{
     font-size: 20px;
     position: relative;
+    background: #fff;
     padding-left: 10px;
 }
 .list_word1 {

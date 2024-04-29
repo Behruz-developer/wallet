@@ -2,10 +2,6 @@ function formatNumber(number) {
     return number.toLocaleString('ru-RU');
 }
 
-function formatMoney(amount) {
-    return amount.toLocaleString('ru-RU');
-}
-
 const UZS = document.getElementById('monyUZS');
 const USD = document.getElementById('monyUSD');
 const RUB = document.getElementById('monyRUB');
@@ -16,6 +12,10 @@ const inputBuy = document.getElementById('inputBuy');
 const selectSell = document.getElementById('sell');
 const selectBuy = document.getElementById('buy');
 const tableBody = document.getElementById('table_body');
+
+function formatMoney(amount) {
+    return amount === null ? "0" : amount.toLocaleString('ru-RU');
+}
 
 const onlineWallet = JSON.parse(localStorage.getItem("wallet"));
 const wallet = onlineWallet || [
@@ -28,23 +28,30 @@ UZS.innerText = formatMoney(wallet[0].UZS);
 USD.innerText = formatMoney(wallet[1].USD);
 RUB.innerText = formatMoney(wallet[2].RUB);
 
-const exchanger = {
-    sell: {currency: '', amount: 0},
-    buy: {currency: '', amount: 0},
-    rate: 0
-};
 
+
+const exchanger = {
+    sell: {currency: '', qiymat: 0},
+    buy: {currency: '', qiymat: 0},
+    incr: 0
+};
 selectSell.addEventListener('change', () => exchanger.sell.currency = selectSell.value);
 selectBuy.addEventListener('change', () => exchanger.buy.currency = selectBuy.value);
 
 inputSell.addEventListener('input', (e) => {
     let value = e.target.value.replace(/\D/g, '');
     const number = parseInt(value);
+
     if (!isNaN(number)) {
         e.target.value = formatNumber(number);
-        exchanger.sell.amount = number;
-        exchanger.buy.amount = exchanger.sell.amount * exchanger.rate;
-        inputBuy.innerText = formatNumber(exchanger.buy.amount);
+        exchanger.sell.qiymat = number;
+        if (selectSell.value == 'USD' || selectSell.value == 'RUB') {
+            exchanger.buy.qiymat = exchanger.sell.qiymat * exchanger.incr;
+                
+            }else if(selectSell.value == 'UZS'){
+                exchanger.buy.qiymat = exchanger.sell.qiymat / exchanger.raincrte;
+            }
+        inputBuy.innerText = formatNumber(exchanger.buy.qiymat);
     } else {
         e.target.value = '';
     }
@@ -53,103 +60,117 @@ inputSell.addEventListener('input', (e) => {
 increase.addEventListener('input', (e) => {
     let value = e.target.value.replace(/\D/g, '');
     const number = parseFloat(value);
+
     if (!isNaN(number)) {
         e.target.value = formatNumber(number);
-        exchanger.rate = number;
-        exchanger.buy.amount = exchanger.sell.amount * exchanger.rate;
-        inputBuy.innerText = formatNumber(exchanger.buy.amount);
+        exchanger.incr = number; 
+        if (selectSell.value == 'USD' || selectSell.value == 'RUB') {
+            exchanger.buy.qiymat = exchanger.sell.qiymat * exchanger.incr;
+                
+        }else if(selectSell.value == 'UZS'){
+            exchanger.buy.qiymat = exchanger.sell.qiymat / exchanger.incr;
+        }
+        inputBuy.innerText = formatNumber(exchanger.buy.qiymat);
     } else {
         e.target.value = '';
     }
 });
 
-exchangeBtn.addEventListener('click', () => {
+
+
+exchangeBtn.addEventListener('click', () =>{
+    walletTable()
+    const sellAmount = exchanger.sell.qiymat;
+    const buyAmount = exchanger.buy.qiymat;
+
+    const sellCurrency = exchanger.sell.currency;
+    const buyCurrency = exchanger.buy.currency;
+
+    wallet.forEach(item => {
+        if (item[sellCurrency] !== undefined) {
+            item[sellCurrency] -= sellAmount;
+        }
+        if (item[buyCurrency] !== undefined) {
+            item[buyCurrency] += buyAmount;
+        }
+    });
+
+    localStorage.setItem("wallet", JSON.stringify(wallet));
+    UZS.innerText = formatMoney(wallet[0].UZS);
+    USD.innerText = formatMoney(wallet[1].USD);
+    RUB.innerText = formatMoney(wallet[2].RUB);
+
+    inputSell.value = '';
+    inputBuy.innerText = '0';
+    increase.value = '';
+    selectSell.value = '';
+    selectBuy.value = '';
+
+}) 
+
+const savedWallet = JSON.parse(localStorage.getItem("savedWallet")) || [];
+
+function walletTable() {
+    const { sell, buy, incr } = exchanger;
+
     let emptyFields = 0;
-    if (!exchanger.sell.currency || exchanger.sell.amount === 0) emptyFields++;
-    if (!exchanger.buy.currency || exchanger.buy.amount === 0) emptyFields++;
-    if (exchanger.rate === 0) emptyFields++;
+    if (!sell.currency || sell.qiymat === 0) emptyFields++;
+    if (!buy.currency || buy.qiymat === 0) emptyFields++;
+    if (incr === 0) emptyFields++;
 
     if (emptyFields === 1) {
-        alert("Bitta malumot to'ldirilmagan ");
+        alert("Bitta ma'lumot to'ldirilmagan ");
     } else if (emptyFields > 1) {
         alert("Malumotlarni to'ldiring");
-    } else if(exchanger.sell.currency === exchanger.buy.currency){
+    } else if(sell.currency == buy.currency){
         alert("2ta bir xil kurs tanlangan");
     } else {
-        const sellAmount = exchanger.sell.amount;
-        const buyAmount = exchanger.buy.amount;
-        const sellCurrency = exchanger.sell.currency;
-        const buyCurrency = exchanger.buy.currency;
-
-        wallet.forEach(item => {
-            if (item[sellCurrency] !== undefined) {
-                item[sellCurrency] -= sellAmount;
-            }
-            if (item[buyCurrency] !== undefined) {
-                item[buyCurrency] += buyAmount;
-            }
-        });
-
-        localStorage.setItem("wallet", JSON.stringify(wallet));
-
-        UZS.innerText = formatMoney(wallet[0].UZS);
-        USD.innerText = formatMoney(wallet[1].USD);
-        RUB.innerText = formatMoney(wallet[2].RUB);
-
-        inputSell.value = '';
-        inputBuy.innerText = '0';
-        increase.value = '';
-        selectSell.value = '';
-        selectBuy.value = '';
-
-        addToTable(`${exchanger.sell.currency} : ${formatMoney(exchanger.sell.amount)}`,
-            `${exchanger.buy.currency} : ${formatMoney(exchanger.buy.amount)}`,
-            formatMoney(exchanger.rate),
-            getCurrentTimeFormatted());
-        saveExchangeData();
-    }
-});
-
-function addToTable(sell, buy, rate, time) {
-    const trBody = document.createElement('tr');
-    ['sell', 'buy', 'rate', 'time'].forEach((key, idx) => {
-        const tdValue = document.createElement('td');
-        tdValue.classList.add('list_word');
-        tdValue.innerText = arguments[idx];
-        trBody.appendChild(tdValue);
-    });
-    tableBody.appendChild(trBody);
-}
-function saveExchangeData() {
-    const exchangeData = Array.from(document.querySelectorAll('#table_body tr')).map(tr => {
-        const cells = tr.querySelectorAll('td');
-        return {
-            sell: cells[0].innerText,
-            buy: cells[1].innerText,
-            rate: cells[2].innerText,
-            time: cells[3].innerText
+        const transaction = {
+            sellCurrency: sell.currency,
+            sellAmount: sell.qiymat,
+            buyCurrency: buy.currency,
+            buyAmount: buy.qiymat,
+            exchangeRate: incr,
+            date: formatDate(new Date())
         };
-    });
-    localStorage.setItem("exchangeData", JSON.stringify(exchangeData));
+        savedWallet.push(transaction);
+        localStorage.setItem("savedWallet", JSON.stringify(savedWallet));
+
+        addTransactionToTable(transaction);
+    }
 }
 
-function loadExchangeData() {
-    const exchangeData = JSON.parse(localStorage.getItem("exchangeData")) || [];
-    exchangeData.forEach(data => {
-        addToTable(data.sell, data.buy, data.rate, data.time);
-    });
+function addTransactionToTable(transaction) {
+    const tr = document.createElement('tr');
+
+    addCell(tr, `${transaction.sellCurrency} : ${formatMoney(transaction.sellAmount)}`);
+    addCell(tr, `${transaction.buyCurrency} : ${formatMoney(transaction.buyAmount)}`);
+    addCell(tr, formatMoney(transaction.exchangeRate));
+    addCell(tr, transaction.date);
+
+    tableBody.appendChild(tr);
 }
 
-function getCurrentTimeFormatted() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-    const day = now.getDate();
-    const hour = now.getHours();
-    const minute = String(now.getMinutes()).padStart(2, '0');
-    return `${day} / ${month} / ${year}, ${hour}:${minute}`;
+function addCell(tr, text) {
+    const td = document.createElement('td');
+    td.classList.add('list_word');
+    td.textContent = text;
+    tr.appendChild(td);
+}
+
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = date.getDate();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    const formattedMinute = String(minute).padStart(2, '0');
+    
+    return `${day}.${month}.${year}, ${hour}:${formattedMinute}`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadExchangeData(); 
+    savedWallet.forEach(transaction => {
+        addTransactionToTable(transaction);
+    });
 });
